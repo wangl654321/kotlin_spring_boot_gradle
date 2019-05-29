@@ -57,7 +57,6 @@ class FileController {
         ftp.fileName = "M100002677_20190515.txt"
 
         logger.info("对账文件下载===>开始")
-
         var sftpUtil = SftpUtil()
         //文件对应表字段
         val attribute = arrayOf("merchantId", "orderNo", "flowNo", "orderAmt", "curType", "tradeTime", "status", "type", "bankId", "bankName", "customerName", "customerNo", "fee", "refundNo")
