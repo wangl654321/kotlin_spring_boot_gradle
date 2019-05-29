@@ -1,0 +1,59 @@
+spring:
+  # 运行环境 dev:开发环境|test:测试环境|prod:生产环境
+  profiles:
+    active: dev
+
+#  #支持热部署
+#  devtools:
+#    restart:
+#      enabled: true  #设置开启热部署
+#  freemarker:
+#    cache: false    #页面不加载缓存，修改即时生效
+#debug: true
+
+  #添加对jsp支持
+  mvc:
+    view:
+      prefix:  /WEB-INF/views/
+      suffix: .jsp
+      #静态文件地址
+    static-path-pattern: /static/**
+
+
+server:
+  #  Tomcat  服务配置server:server:server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 80
+  servlet:
+    context-path: /
+
+
+mybatis:
+  #实体类所做包
+  type-aliases-package: com.wang.dao
+  #mapper.xml所在位置
+  mapperLocations: classpath:mapper/*.xml
+  #MyBatis相关自定义配置
+  configLocation: classpath:mybatis-config.xml
+
+
+
+#cmodes:
+#  redis:
+#    open: false  # 是否开启redis缓存  true开启   false关闭
+#  shiro:
+#    redis: fslse # true表示shiro session存到redis里，需要开启redis，才会生效【分布式场景】
+#  reids:
+#    host: 127.0.0.1
+#    port: 6379
+#    password:
+#    database: 0
+#    timeout: 1000
+#    jedis:
+#      pool:
+#        max-active: 6000
+#        max-wait: 1000
+#        max-idle: 400

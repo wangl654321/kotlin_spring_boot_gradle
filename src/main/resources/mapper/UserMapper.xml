@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wang.dao.UserMapper" >
+    <resultMap id="userBaseResultMap" type="com.wang.entity.UserInfo" >
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="address" property="address" />
+    </resultMap>
+
+    <sql id="User_Base_Column_List" >
+        id, name, address
+    </sql>
+
+    <select id="findUserById" resultMap="userBaseResultMap" >
+        SELECT
+        <include refid="User_Base_Column_List" />
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <insert id="saveUser" parameterType="com.wang.entity.UserInfo">
+      insert into user(name,address) values(#{name},#{address})
+    </insert>
+
+    <update id="updateUser" parameterType="com.wang.entity.UserInfo">
+        update user
+
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">
+                name = #{name}
+            </if>
+            <if test="address != null">
+                address = #{address}
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="removeUserById" parameterType="com.wang.entity.UserInfo">
+     delete from user where id=#{id}
+    </delete>
+</mapper>

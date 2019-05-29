@@ -1,0 +1,82 @@
+buildscript {
+    ext.kotlin_version = '1.3.31'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+plugins {
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.31'
+    id 'war'
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'kotlin'
+
+group = 'com.wang'
+version = '1.0.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    //mavenCentral()
+    maven {
+        //更换为阿里的仓库
+        url 'http://maven.aliyun.com/nexus/content/groups/public'
+    }
+}
+
+dependencies {
+    // druid
+    compile group: 'com.alibaba', name: 'druid', version: '1.1.16'
+    // mysql
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+    // pageHelper mybatis分页
+    compile group: 'com.github.pagehelper', name: 'pagehelper', version: '5.1.8'
+    // mybatis
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.0.1'
+    // sftp依赖
+    compile group: 'com.jcraft', name: 'jsch', version: '0.1.54'
+    // redis
+    compile group: 'redis.clients', name: 'jedis', version: '3.0.1'
+    // spring-boot-starter-log4j2
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.1.2.RELEASE'
+    // springboot支持jsp
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.20'
+    // javax.servlet-api
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    //jstl
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+
+    // spring-boot-starter-parent
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.1.5.RELEASE', ext: 'pom'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    // spring-boot-starter-thymeleaf html5支持
+    // compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.5.RELEASE'
+    //spring-boot-devtools热部署插件
+    //compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.1.5.RELEASE'
+}
+
+//排除springboot自带log4j的jar
+configurations {
+    //remove default logger
+    all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+// java编译的时候缺省状态下会因为中文字符而失败
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

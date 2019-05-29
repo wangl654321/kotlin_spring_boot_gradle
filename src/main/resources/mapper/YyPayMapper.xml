@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.YyPayMapper">
+    <resultMap id="BaseResultMap" type="com.wang.entity.YyPay">
+        <id column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="flow_no" jdbcType="VARCHAR" property="flowNo"/>
+        <result column="order_amt" jdbcType="DOUBLE" property="orderAmt"/>
+        <result column="cur_type" jdbcType="VARCHAR" property="curType"/>
+        <result column="trade_time" jdbcType="VARCHAR" property="tradeTime"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="bank_id" jdbcType="VARCHAR" property="bankId"/>
+        <result column="bank_name" jdbcType="VARCHAR" property="bankName"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customer_no" jdbcType="VARCHAR" property="customerNo"/>
+        <result column="fee" jdbcType="DOUBLE" property="fee"/>
+        <result column="refund_no" jdbcType="VARCHAR" property="refundNo"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    pid, order_no, flow_no, order_amt, cur_type, trade_time, status, type, bank_id, bank_name, 
+    customer_name, customer_no, fee, refund_no
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from yy_pay
+        where pid = #{pid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from yy_pay
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.wang.entity.YyPay">
+    insert into yy_pay (pid, order_no, flow_no, 
+      order_amt, cur_type, trade_time, 
+      status, type, bank_id, 
+      bank_name, customer_name, customer_no, 
+      fee, refund_no)
+    values (#{pid,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{flowNo,jdbcType=VARCHAR}, 
+      #{orderAmt,jdbcType=DOUBLE}, #{curType,jdbcType=VARCHAR}, #{tradeTime,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{bankId,jdbcType=VARCHAR}, 
+      #{bankName,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{customerNo,jdbcType=VARCHAR}, 
+      #{fee,jdbcType=DOUBLE}, #{refundNo,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.wang.entity.YyPay">
+        insert into yy_pay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="flowNo != null">
+                flow_no,
+            </if>
+            <if test="orderAmt != null">
+                order_amt,
+            </if>
+            <if test="curType != null">
+                cur_type,
+            </if>
+            <if test="tradeTime != null">
+                trade_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="bankId != null">
+                bank_id,
+            </if>
+            <if test="bankName != null">
+                bank_name,
+            </if>
+            <if test="customerName != null">
+                customer_name,
+            </if>
+            <if test="customerNo != null">
+                customer_no,
+            </if>
+            <if test="fee != null">
+                fee,
+            </if>
+            <if test="refundNo != null">
+                refund_no,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="flowNo != null">
+                #{flowNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderAmt != null">
+                #{orderAmt,jdbcType=DOUBLE},
+            </if>
+            <if test="curType != null">
+                #{curType,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeTime != null">
+                #{tradeTime,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                #{bankId,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null">
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerNo != null">
+                #{customerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="fee != null">
+                #{fee,jdbcType=DOUBLE},
+            </if>
+            <if test="refundNo != null">
+                #{refundNo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wang.entity.YyPay">
+        update yy_pay
+        <set>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="flowNo != null">
+                flow_no = #{flowNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderAmt != null">
+                order_amt = #{orderAmt,jdbcType=DOUBLE},
+            </if>
+            <if test="curType != null">
+                cur_type = #{curType,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeTime != null">
+                trade_time = #{tradeTime,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                bank_id = #{bankId,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null">
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerNo != null">
+                customer_no = #{customerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="fee != null">
+                fee = #{fee,jdbcType=DOUBLE},
+            </if>
+            <if test="refundNo != null">
+                refund_no = #{refundNo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where pid = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wang.entity.YyPay">
+    update yy_pay
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      flow_no = #{flowNo,jdbcType=VARCHAR},
+      order_amt = #{orderAmt,jdbcType=DOUBLE},
+      cur_type = #{curType,jdbcType=VARCHAR},
+      trade_time = #{tradeTime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_no = #{customerNo,jdbcType=VARCHAR},
+      fee = #{fee,jdbcType=DOUBLE},
+      refund_no = #{refundNo,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into yy_pay (order_no, flow_no,
+        order_amt, cur_type, trade_time,
+        status, type, bank_id,bank_name,
+        customer_name, customer_no, fee, refund_no)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.orderNo},#{item.flowNo}, #{item.orderAmt},
+            #{item.curType},#{item.tradeTime}, #{item.status},
+            #{item.type},#{item.bankId}, #{item.bankName},
+            #{item.customerName},#{item.customerNo}, #{item.fee}, #{item.refundNo})
+        </foreach>
+    </insert>
+</mapper>
